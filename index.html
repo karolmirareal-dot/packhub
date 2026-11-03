@@ -350,7 +350,7 @@ formEl.addEventListener("submit",async e=>{
   }catch(err){console.error("FULL ERROR:",err);alert("Ошибка загрузки:\n"+err.message+"\n\nСтек: "+(err.stack||"нет"))}
   finally{btn.disabled=false;btn.textContent="Добавить пак"}
 });}
-loadPacks();});
+window.openPack=openPack;window.like=like;window.dl=dl;loadPacks();});
 </script>
 </body>
 </html>
