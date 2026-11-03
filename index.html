@@ -227,11 +227,14 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim2);font-si
     <textarea id="pDesc" required placeholder="Что меняет пак, чем отличается..."></textarea>
     <div style="height:20px"></div>
     <label>Превью (фото) <b>*</b></label>
-    <div class="drop" id="dropImg"><span class="ic">🖼</span>Перетащи картинку или клик<input type="file" id="pImg" accept="image/*" hidden></div>
+    <div class="drop" id="dropImg"><span class="ic">🖼</span><span id="dropImgText">Перетащи картинку или клик</span></div>
+    <input type="file" id="pImg" accept="image/*" style="position:absolute;width:1px;height:1px;opacity:0;overflow:hidden" tabindex="-1">
     <label>Скриншоты</label>
-    <div class="drop" id="dropShots"><span class="ic">📸</span>Перетащи скриншоты или клик<input type="file" id="pShots" accept="image/*" multiple hidden></div>
+    <div class="drop" id="dropShots"><span class="ic">📸</span><span id="dropShotsText">Перетащи скриншоты или клик</span></div>
+    <input type="file" id="pShots" accept="image/*" multiple style="position:absolute;width:1px;height:1px;opacity:0;overflow:hidden" tabindex="-1">
     <label>Файл пака (.zip) <b>*</b></label>
-    <div class="drop" id="dropZip"><span class="ic">🗜</span>Перетащи .zip или клик<input type="file" id="pZip" accept=".zip,application/zip" required hidden></div>
+    <div class="drop" id="dropZip"><span class="ic">🗜</span><span id="dropZipText">Перетащи .zip или клик</span></div>
+    <input type="file" id="pZip" accept=".zip,application/zip" required style="position:absolute;width:1px;height:1px;opacity:0;overflow:hidden" tabindex="-1">
     <button class="btn" type="submit" id="submitBtn">Добавить пак</button>
   </form>
 </div></section>
@@ -306,8 +309,9 @@ $("#themeToggle").onclick=()=>{const l=document.body.getAttribute("data-theme")=
 if(localStorage.getItem("ph_theme")==="light"){document.body.setAttribute("data-theme","light");$("#themeToggle").textContent="☀️"}else document.body.setAttribute("data-theme","dark");
 function toast(msg,err){const t=document.createElement("div");t.className="toast"+(err?" err":"");t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2600)}
 function hook(drop,input){
-  const origText=drop.textContent;
-  drop.onclick=e=>{e.preventDefault();input.click()};
+  const txt=document.getElementById(input.id+"Text");
+  const orig=txt.textContent;
+  drop.onclick=e=>{e.preventDefault();e.stopPropagation();input.click()};
   drop.ondragover=e=>{e.preventDefault();drop.classList.add("over")};
   drop.ondragleave=()=>drop.classList.remove("over");
   drop.ondrop=e=>{e.preventDefault();e.stopPropagation();drop.classList.remove("over");input.files=e.dataTransfer.files;input.dispatchEvent(new Event("change"))};
@@ -315,7 +319,7 @@ function hook(drop,input){
     const files=[...input.files];
     const ok=files.length&&(input.id!=="pZip"||files.every(f=>f.name.toLowerCase().endsWith(".zip")));
     drop.classList.toggle("ok",ok);drop.classList.toggle("err",!ok);
-    drop.textContent=files.length?(ok?"✅ ":"⚠️ ")+files.map(f=>f.name).join(", "):origText;
+    txt.textContent=files.length?(ok?"Выбрано: ":"Ошибка: ")+files.map(f=>f.name).join(", "):orig;
   };
 }
 hook($("#dropImg"),$("#pImg"));hook($("#dropShots"),$("#pShots"));hook($("#dropZip"),$("#pZip"));
