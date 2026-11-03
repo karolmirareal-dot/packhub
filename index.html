@@ -309,7 +309,7 @@ $("#themeToggle").onclick=()=>{const l=document.body.getAttribute("data-theme")=
 if(localStorage.getItem("ph_theme")==="light"){document.body.setAttribute("data-theme","light");$("#themeToggle").textContent="☀️"}else document.body.setAttribute("data-theme","dark");
 function toast(msg,err){const t=document.createElement("div");t.className="toast"+(err?" err":"");t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2600)}
 function hook(drop,input){
-  const txt=document.getElementById(input.id+"Text");
+  const txt=document.getElementById(drop.id+"Text");
   const orig=txt.textContent;
   drop.onclick=e=>{e.preventDefault();e.stopPropagation();input.click()};
   drop.ondragover=e=>{e.preventDefault();drop.classList.add("over")};
