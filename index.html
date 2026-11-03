@@ -9,47 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
---bg:#060a05;--bg2:#0b110a;--panel:rgba(19,30,15,.72);--panel2:rgba(26,40,20,.6);
---line:rgba(74,120,60,.22);--line2:rgba(96,150,74,.35);
---txt:#eaf6df;--dim:#8fb184;--dim2:#5d7352;
---ac:#71ea82;--ac2:#33b657;--ac-dark:rgba(30,80,40,.35);
---gold:#f6c445;--red:#ff5b6a;--r:18px;
---f-px:'Press Start 2P',monospace;--f-main:'Rubik',system-ui,sans-serif;
-}
-[data-theme="light"]{
---bg:#eef4e7;--bg2:#e3ecdb;--panel:rgba(255,255,255,.8);--panel2:rgba(242,248,236,.7);
---line:rgba(120,160,105,.3);--line2:rgba(100,140,85,.45);
---txt:#131c0e;--dim:#546b48;--dim2:#84997a;
---ac:#1fa54a;--ac2:#12813c;--ac-dark:rgba(200,235,205,.5);
-}
+:root{--bg:#060a05;--bg2:#0b110a;--panel:rgba(19,30,15,.72);--panel2:rgba(26,40,20,.6);--line:rgba(74,120,60,.22);--line2:rgba(96,150,74,.35);--txt:#eaf6df;--dim:#8fb184;--dim2:#5d7352;--ac:#71ea82;--ac2:#33b657;--ac-dark:rgba(30,80,40,.35);--gold:#f6c445;--red:#ff5b6a;--r:18px;--f-px:'Press Start 2P',monospace;--f-main:'Rubik',system-ui,sans-serif}
+[data-theme="light"]{--bg:#eef4e7;--bg2:#e3ecdb;--panel:rgba(255,255,255,.8);--panel2:rgba(242,248,236,.7);--line:rgba(120,160,105,.3);--line2:rgba(100,140,85,.45);--txt:#131c0e;--dim:#546b48;--dim2:#84997a;--ac:#1fa54a;--ac2:#12813c;--ac-dark:rgba(200,235,205,.5)}
 html{scroll-behavior:smooth}
 body{font-family:var(--f-main);background:var(--bg);color:var(--txt);overflow-x:hidden;line-height:1.55;transition:background .3s,color .3s}
 ::selection{background:var(--ac);color:#04130a}
-
-/* ---------- фон ---------- */
-.bg{position:fixed;inset:0;z-index:-3;
-background:
-radial-gradient(ellipse 70% 55% at 75% -12%,rgba(113,234,130,.16),transparent 60%),
-radial-gradient(ellipse 55% 45% at 8% 88%,rgba(51,182,87,.12),transparent 60%),
-var(--bg);
-}
-.bg::after{content:"";position:absolute;inset:0;opacity:.4;
-background-image:
-linear-gradient(rgba(113,234,130,.045) 1px,transparent 1px),
-linear-gradient(90deg,rgba(113,234,130,.045) 1px,transparent 1px);
-background-size:54px 54px;
-mask-image:radial-gradient(ellipse 75% 65% at 50% 25%,#000 25%,transparent 80%);
-}
-[data-theme="light"] .bg::after{opacity:.55}
+.bg{position:fixed;inset:0;z-index:-3;background:radial-gradient(ellipse 70% 55% at 75% -12%,rgba(113,234,130,.16),transparent 60%),radial-gradient(ellipse 55% 45% at 8% 88%,rgba(51,182,87,.12),transparent 60%),var(--bg)}
+.bg::after{content:"";position:absolute;inset:0;opacity:.4;background-image:linear-gradient(rgba(113,234,130,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(113,234,130,.045) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(ellipse 75% 65% at 50% 25%,#000 25%,transparent 80%)}
 .orb{position:fixed;border-radius:50%;filter:blur(70px);z-index:-2;opacity:.5;pointer-events:none;animation:orb 14s ease-in-out infinite alternate}
 .orb.a{width:380px;height:380px;background:rgba(113,234,130,.14);top:-120px;left:-100px}
 .orb.b{width:300px;height:300px;background:rgba(51,182,87,.12);bottom:-80px;right:-60px;animation-delay:-7s}
 @keyframes orb{from{transform:translate(0,0)}to{transform:translate(50px,40px)}}
-
 .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
-
-/* ---------- шапка ---------- */
 header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 72%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 0}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--txt)}
@@ -63,25 +34,14 @@ nav a:hover{background:var(--panel2);color:var(--txt)}
 .right{display:flex;gap:9px;align-items:center}
 .icon-btn{background:var(--panel);border:1px solid var(--line);color:var(--txt);width:42px;height:42px;border-radius:11px;cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;transition:.2s;backdrop-filter:blur(8px)}
 .icon-btn:hover{border-color:var(--ac);transform:translateY(-2px)}
-
-/* ---------- кнопки ---------- */
-.btn{display:inline-flex;align-items:center;gap:9px;position:relative;overflow:hidden;
-background:linear-gradient(180deg,var(--ac),var(--ac2));color:#04130a;border:none;border-radius:12px;
-padding:12px 22px;font-weight:800;font-size:14px;cursor:pointer;text-decoration:none;
-transition:transform .15s,box-shadow .15s,filter .15s;box-shadow:0 6px 18px rgba(113,234,130,.32);
-font-family:var(--f-main);
-}
-.btn::before{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;
-background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);
-transform:skewX(-20deg);transition:left .5s}
+.btn{display:inline-flex;align-items:center;gap:9px;position:relative;overflow:hidden;background:linear-gradient(180deg,var(--ac),var(--ac2));color:#04130a;border:none;border-radius:12px;padding:12px 22px;font-weight:800;font-size:14px;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .15s,filter .15s;box-shadow:0 6px 18px rgba(113,234,130,.32);font-family:var(--f-main)}
+.btn::before{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);transition:left .5s}
 .btn:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(113,234,130,.45);filter:brightness(1.05)}
 .btn:hover::before{left:130%}
 .btn:active{transform:translateY(0)}
 .btn.ghost{background:color-mix(in srgb,var(--panel) 80%,transparent);color:var(--txt);border:1px solid var(--line2);box-shadow:none;backdrop-filter:blur(8px)}
 .btn.ghost::before{display:none}
 .btn.ghost:hover{border-color:var(--ac);box-shadow:none}
-
-/* ---------- герой ---------- */
 #hero{padding:100px 0 80px;position:relative;overflow:hidden}
 #hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
 h1{font-family:var(--f-px);font-size:clamp(22px,3.6vw,40px);line-height:1.5;letter-spacing:0;font-weight:400;text-shadow:0 0 40px rgba(113,234,130,.25)}
@@ -93,7 +53,6 @@ h1 .g{color:var(--ac);text-shadow:0 0 34px rgba(113,234,130,.55)}
 .stat:hover{transform:translateY(-4px);border-color:var(--line2)}
 .stat b{font-family:var(--f-px);font-size:22px;color:var(--ac);display:block;margin-bottom:6px}
 .stat span{color:var(--dim2);font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px}
-
 .hero-card{position:relative;animation:float 6s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
 .hero-frame{background:var(--panel);border:1px solid var(--line2);border-radius:22px;box-shadow:0 30px 70px rgba(0,0,0,.55);overflow:hidden;transform:rotate(1.5deg);transition:transform .35s;backdrop-filter:blur(12px)}
@@ -107,37 +66,24 @@ h1 .g{color:var(--ac);text-shadow:0 0 34px rgba(113,234,130,.55)}
 .hero-empty p{color:var(--dim2);font-size:14px;font-weight:700}
 .loadbar{height:14px;background:rgba(0,0,0,.75);padding:3px;display:flex;gap:3px}
 .loadbar i{flex:1;background:var(--ac2);animation:seg 1.5s ease infinite;box-shadow:inset 0 -3px 0 rgba(0,0,0,.25)}
-.loadbar i:nth-child(2){animation-delay:.14s}.loadbar i:nth-child(3){animation-delay:.28s}
-.loadbar i:nth-child(4){animation-delay:.42s}.loadbar i:nth-child(5){animation-delay:.56s}
-.loadbar i:nth-child(6){animation-delay:.7s}.loadbar i:nth-child(7){animation-delay:.84s}
-.loadbar i:nth-child(8){animation-delay:.98s}.loadbar i:nth-child(9){animation-delay:1.12s}
+.loadbar i:nth-child(2){animation-delay:.14s}.loadbar i:nth-child(3){animation-delay:.28s}.loadbar i:nth-child(4){animation-delay:.42s}.loadbar i:nth-child(5){animation-delay:.56s}.loadbar i:nth-child(6){animation-delay:.7s}.loadbar i:nth-child(7){animation-delay:.84s}.loadbar i:nth-child(8){animation-delay:.98s}.loadbar i:nth-child(9){animation-delay:1.12s}
 @keyframes seg{0%,100%{opacity:.25}50%{opacity:1}}
-[data-theme="light"] .loadbar{background:var(--line)}
-
-/* ---------- секции ---------- */
 section{padding:70px 0}
 .sec-head{display:flex;align-items:center;gap:16px;margin-bottom:8px}
 .sec-line{flex:1;height:2px;background:linear-gradient(90deg,var(--line2),transparent);border-radius:2px}
 h2{font-family:var(--f-px);font-size:clamp(14px,1.9vw,20px);letter-spacing:1px;font-weight:400;white-space:nowrap}
 h2::before{content:"▚ ";color:var(--ac)}
 .h-sub{color:var(--dim);margin-bottom:30px;font-size:15px}
-
-/* ---------- табы ---------- */
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
 .tab{padding:11px 20px;border-radius:12px;background:var(--panel);border:1px solid var(--line);color:var(--dim);font-weight:700;font-size:14px;cursor:pointer;transition:.2s;display:flex;gap:8px;align-items:center;backdrop-filter:blur(8px)}
 .tab:hover{border-color:var(--ac);color:var(--txt);transform:translateY(-1px)}
 .tab.active{background:linear-gradient(180deg,var(--ac),var(--ac2));color:#04130a;border-color:transparent;box-shadow:0 6px 16px rgba(113,234,130,.35)}
 .tab .cnt{font-size:11.5px;opacity:.85;font-weight:900;background:rgba(0,0,0,.14);padding:2px 8px;border-radius:99px}
-.tab:not(.active) .cnt{background:var(--ac-dark);color:var(--ac)}
-
-/* ---------- фильтры ---------- */
 .filters{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:30px}
 input[type=text],select,textarea{background:var(--panel);border:1px solid var(--line);color:var(--txt);border-radius:12px;padding:12px 16px;font-size:14px;font-family:inherit;outline:none;transition:border-color .2s,box-shadow .2s;backdrop-filter:blur(8px)}
 input:focus,select:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 4px rgba(113,234,130,.13)}
 .search{flex:1;min-width:230px}
 select{cursor:pointer;appearance:none;padding-right:36px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238fb184' stroke-width='2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
-
-/* ---------- сетка ---------- */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:24px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;cursor:pointer;position:relative;display:flex;flex-direction:column;transition:transform .22s,box-shadow .22s,border-color .22s;animation:cardIn .5s cubic-bezier(.2,.7,.3,1) both;backdrop-filter:blur(10px)}
 @keyframes cardIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
@@ -159,9 +105,7 @@ select{cursor:pointer;appearance:none;padding-right:36px;background-image:url("d
 .dls{color:var(--dim2);font-size:12.5px;font-weight:800;display:flex;gap:5px;align-items:center}
 .zip-pill{font-family:var(--f-px);font-size:7px;background:var(--panel2);color:var(--dim);padding:5px 9px;border-radius:7px;border:1px solid var(--line)}
 .empty{text-align:center;padding:80px 24px;color:var(--dim2);border:2px dashed var(--line2);border-radius:var(--r);background:var(--panel)}
-.empty .big{font-size:48px;display:block;margin-bottom:14px;filter:drop-shadow(0 8px 18px rgba(113,234,130,.3))}
-
-/* ---------- форма ---------- */
+.empty .big{font-size:48px;display:block;margin-bottom:14px}
 .form{background:var(--panel);border:1px solid var(--line2);border-radius:22px;padding:38px;max-width:780px;margin:0 auto;box-shadow:0 26px 60px rgba(0,0,0,.45);backdrop-filter:blur(12px)}
 .f-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:24px 0}
 label{font-weight:800;font-size:11.5px;color:var(--dim);display:block;margin-bottom:9px;letter-spacing:1px;text-transform:uppercase}
@@ -171,12 +115,8 @@ textarea{width:100%;min-height:120px;resize:vertical}
 .drop:hover,.drop.over{border-color:var(--ac);color:var(--txt);background:var(--ac-dark);transform:scale(1.01)}
 .drop.ok{border-color:var(--ac);color:var(--ac)}
 .drop.err{border-color:var(--red);color:var(--red)}
-.drop .ic{font-size:28px;display:block;margin-bottom:10px;filter:drop-shadow(0 4px 10px rgba(113,234,130,.3))}
-
-/* ---------- футер ---------- */
+.drop .ic{font-size:28px;display:block;margin-bottom:10px}
 footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim2);font-size:13px;text-align:center}
-
-/* ---------- модалка ---------- */
 .modal-bg{position:fixed;inset:0;background:rgba(3,8,4,.82);backdrop-filter:blur(8px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
 .modal-bg.show{display:flex}
 .modal{background:var(--panel);border:1px solid var(--line2);border-radius:22px;max-width:840px;width:100%;max-height:92vh;overflow:auto;position:relative;animation:pop .32s cubic-bezier(.2,.8,.3,1.15);backdrop-filter:blur(14px)}
@@ -197,17 +137,13 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim2);font-si
 .gallery img{width:100%;border-radius:11px;cursor:zoom-in;transition:transform .2s,border-color .2s;border:1px solid var(--line)}
 .gallery img:hover{transform:scale(1.05);border-color:var(--ac2)}
 .m-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-
-/* ---------- тост ---------- */
 .toast{position:fixed;bottom:26px;right:26px;z-index:200;background:linear-gradient(180deg,var(--ac),var(--ac2));color:#04130a;padding:15px 24px;border-radius:13px;font-weight:800;box-shadow:0 12px 34px rgba(113,234,130,.45);animation:toastIn .3s ease}
 @keyframes toastIn{from{opacity:0;transform:translateY(16px)}to{opacity:1}}
 .toast.err{background:linear-gradient(180deg,#ff7a85,var(--red));box-shadow:0 12px 34px rgba(255,91,106,.45)}
-
 ::-webkit-scrollbar{width:10px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--line2);border-radius:5px}
 ::-webkit-scrollbar-thumb:hover{background:var(--ac2)}
-
 @media(max-width:960px){#hero .wrap{grid-template-columns:1fr}.hero-card{max-width:560px}.f-grid{grid-template-columns:1fr}}
 @media(max-width:640px){nav{display:none}.form{padding:26px 18px}section{padding:52px 0}.m-content{padding:20px 18px 24px}.m-title{padding:60px 20px 18px}}
 </style>
@@ -227,12 +163,9 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim2);font-si
     </svg>
     <span class="logo-txt">PACK<b>HUB</b></span>
   </a>
-  <nav>
-    <a href="#catalog">Каталог</a>
-    <a href="#add">Добавить</a>
-  </nav>
+  <nav><a href="#catalog">Каталог</a><a href="#add">Добавить</a></nav>
   <div class="right">
-    <button class="icon-btn" id="themeToggle" title="Тема">🌙</button>
+    <button class="icon-btn" id="themeToggle">🌙</button>
     <a class="btn" href="#add">+ Выложить пак</a>
   </div>
 </div></div></header>
@@ -240,11 +173,8 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim2);font-si
 <section id="hero"><div class="wrap">
   <div>
     <h1>РЕСУРС ПАКИ<br><span class="g">MINECRAFT</span></h1>
-    <p class="sub">Настоящие .zip паки, настоящие скриншоты, настоящие лайки. Никакой воды — только то, что ты загрузил.</p>
-    <div class="hero-btns">
-      <a class="btn" href="#catalog">Каталог</a>
-      <a class="btn ghost" href="#add">Загрузить свой</a>
-    </div>
+    <p class="sub">Настоящие .zip паки, которые видят и скачивают все. Загружай через форму — и друг сразу сможет его скачать.</p>
+    <div class="hero-btns"><a class="btn" href="#catalog">Каталог</a><a class="btn ghost" href="#add">Загрузить свой</a></div>
     <div class="stats">
       <div class="stat"><b id="statPacks">0</b><span>паков</span></div>
       <div class="stat"><b id="statLikes">0</b><span>лайков</span></div>
@@ -254,15 +184,10 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim2);font-si
   <div class="hero-card">
     <div class="hero-frame">
       <div class="hero-top">
-        <span class="dot" style="background:#ff5f57"></span>
-        <span class="dot" style="background:#febc2e"></span>
-        <span class="dot" style="background:#28c840"></span>
+        <span class="dot" style="background:#ff5f57"></span><span class="dot" style="background:#febc2e"></span><span class="dot" style="background:#28c840"></span>
         <span class="hero-title">packhub.zip</span>
       </div>
-      <div class="hero-empty" id="heroPreview">
-        <span class="big">🎮</span>
-        <p>Здесь появится твой пак</p>
-      </div>
+      <div class="hero-empty" id="heroPreview"><span class="big">🎮</span><p>Здесь появится твой пак</p></div>
       <div class="loadbar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     </div>
   </div>
@@ -270,7 +195,7 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim2);font-si
 
 <section id="catalog"><div class="wrap">
   <div class="sec-head"><h2>КАТАЛОГ</h2><div class="sec-line"></div></div>
-  <p class="h-sub">Настоящие паки, добавленные через форму ниже.</p>
+  <p class="h-sub">Паки видны всем — загрузи свой, и друзья смогут его скачать.</p>
   <div class="tabs" id="tabs">
     <button class="tab active" data-tab="all">Все</button>
     <button class="tab" data-tab="new">Новые</button>
@@ -283,15 +208,12 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim2);font-si
     <select id="fTag"><option value="">Все теги</option></select>
   </div>
   <div class="grid" id="grid"></div>
-  <div class="empty" id="empty" style="display:none">
-    <span class="big">📦</span>
-    Пока пусто. Добавь первый пак — он появится здесь.
-  </div>
+  <div class="empty" id="empty" style="display:none"><span class="big">📦</span>Пока пусто. Добавь первый пак!</div>
 </div></section>
 
 <section id="add"><div class="wrap">
   <div class="sec-head"><h2>ВЫЛОЖИТЬ ПАК</h2><div class="sec-line"></div></div>
-  <p class="h-sub">Фото, описание и .zip — всё по-настоящему.</p>
+  <p class="h-sub">Фото, описание и .zip загрузятся на сервер — пак увидят все.</p>
   <form class="form" id="packForm">
     <div class="f-grid">
       <div><label>Название <b>*</b></label><input type="text" id="pName" required placeholder="NeonCraft PvP"></div>
@@ -302,7 +224,7 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim2);font-si
       <div><label>Тег 2</label><input type="text" id="pTag2" placeholder="Low Fire"></div>
     </div>
     <label>Описание <b>*</b></label>
-    <textarea id="pDesc" required placeholder="Что меняет пак, чем отличается, для кого подходит..."></textarea>
+    <textarea id="pDesc" required placeholder="Что меняет пак, чем отличается..."></textarea>
     <div style="height:20px"></div>
     <label>Превью (фото) <b>*</b></label>
     <div class="drop" id="dropImg"><span class="ic">🖼</span>Перетащи картинку или клик<input type="file" id="pImg" accept="image/*" hidden></div>
@@ -310,111 +232,107 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim2);font-si
     <div class="drop" id="dropShots"><span class="ic">📸</span>Перетащи скриншоты или клик<input type="file" id="pShots" accept="image/*" multiple hidden></div>
     <label>Файл пака (.zip) <b>*</b></label>
     <div class="drop" id="dropZip"><span class="ic">🗜</span>Перетащи .zip или клик<input type="file" id="pZip" accept=".zip,application/zip" required hidden></div>
-    <button class="btn" type="submit">Добавить пак</button>
+    <button class="btn" type="submit" id="submitBtn">Добавить пак</button>
   </form>
 </div></section>
 
-<footer><div class="wrap">
-  PACKHUB · ресурс паки для Minecraft · не связан с Mojang и Microsoft
-</div></footer>
+<footer><div class="wrap">PACKHUB · ресурс паки для Minecraft · не связан с Mojang и Microsoft</div></footer>
 
 <div class="modal-bg" id="modalBg"><div class="modal">
   <button class="close" id="closeModal">✕</button>
-  <div class="modal-body">
-    <div class="m-head" id="mHead"></div>
-    <div class="m-content" id="mContent"></div>
-  </div>
+  <div class="modal-body"><div class="m-head" id="mHead"></div><div class="m-content" id="mContent"></div></div>
 </div></div>
 
 <script>
-let PACKS=[]; try{const d=localStorage.getItem("ph_packs");if(d)PACKS=JSON.parse(d)}catch(e){}
-let state={likes:{},dls:{}}; try{const s=localStorage.getItem("ph_state");if(s)state=JSON.parse(s)}catch(e){}
+// --- Supabase REST (без SDK) ---
+const SB_URL="https://xukxzwsebhsbxlerzlux.supabase.co";
+const SB_KEY="sb_publishable_1hHVxbs5rT7zjJqDB7JVkg_nLUOtlY0";
+const H={"apikey":SB_KEY,"Authorization":"Bearer "+SB_KEY,"Content-Type":"application/json"};
 const $=s=>document.querySelector(s);
-let tab="all";
+let tab="all", PACKS=[], liked={};
 const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
-function save(){localStorage.setItem("ph_packs",JSON.stringify(PACKS));localStorage.setItem("ph_state",JSON.stringify(state))}
-function L(p){return(p._bl||0)+(state.likes[p.id]?1:0)}
-function D(p){return(p._bd||0)+(state.dls[p.id]||0)}
+try{liked=JSON.parse(localStorage.getItem("ph_liked")||"{}")}catch(e){}
+
+async function loadPacks(){
+  try{
+    const r=await fetch(SB_URL+"/rest/v1/packs?select=*&order=created_at.desc",{headers:H});
+    PACKS=await r.json();
+    if(!Array.isArray(PACKS))PACKS=[];
+  }catch(e){PACKS=[]}
+  render();
+}
+function sbUrl(p){return SB_URL+"/storage/v1/object/public/packs/"+p}
+
 function render(){
-  const vers=[...new Set(PACKS.map(p=>p.ver))].sort(), tags=[...new Set(PACKS.flatMap(p=>p.tags))].sort();
-  $("#fVer").innerHTML='<option value="">Все версии</option>'+vers.map(v=>'<option'+($("#fVer").value===v?" selected":"")+'>'+esc(v)+'</option>').join("");
-  $("#fTag").innerHTML='<option value="">Все теги</option>'+tags.map(t=>'<option'+($("#fTag").value===t?" selected":"")+'>'+esc(t)+'</option>').join("");
+  const vers=[...new Set(PACKS.map(p=>p.ver))].sort(),tags=[...new Set(PACKS.flatMap(p=>p.tags||[]))].sort();
+  $("#fVer").innerHTML='<option value="">Все версии</option>'+vers.map(v=>'<option>'+esc(v)+'</option>').join("");
+  $("#fTag").innerHTML='<option value="">Все теги</option>'+tags.map(t=>'<option>'+esc(t)+'</option>').join("");
   let v=$("#fVer").value,t=$("#fTag").value,q=$("#search").value.toLowerCase();
-  let list=PACKS.filter(p=>(!v||p.ver===v)&&(!t||p.tags.includes(t))&&p.name.toLowerCase().includes(q));
-  if(tab==="new")list=list.filter(p=>p.isNew).sort((a,b)=>b.added-a.added);
-  if(tab==="pop")list=[...list].sort((a,b)=>L(b)-L(a));
-  if(tab==="liked")list=list.filter(p=>state.likes[p.id]);
-  const cnt=k=>PACKS.filter(p=>k==="new"?p.isNew:k==="liked"?state.likes[p.id]:true).length;
-  document.querySelectorAll(".tab").forEach(b=>{const k=b.dataset.tab;if(k!=="all")b.innerHTML=(k==="new"?"Новые":k==="pop"?"Популярные":"Мои лайки")+' <span class="cnt">'+cnt(k)+'</span>'});
+  let list=PACKS.filter(p=>(!v||p.ver===v)&&(!t||(p.tags||[]).includes(t))&&p.name.toLowerCase().includes(q));
+  if(tab==="pop")list=[...list].sort((a,b)=>b.likes-a.likes);
+  if(tab==="liked")list=list.filter(p=>liked[p.id]);
   $("#empty").style.display=list.length?"none":"block";
-  $("#grid").innerHTML=list.map((p,i)=>'<div class="card" style="animation-delay:'+(i*45)+'ms" onclick="openPack(\''+p.id+'\')"><div class="thumb">'+(p.coverImg?'<img src="'+p.coverImg+'" alt="'+esc(p.name)+'">':'<div class="thumb-empty"><span>📦</span></div>')+(p.isNew?'<span class="badge">NEW</span>':"")+'</div><div class="card-body"><div class="card-title">'+esc(p.name)+'</div><div class="card-meta"><span>🎮 '+esc(p.ver)+'</span><span>'+p.tags.map(esc).map(t=>'<span class="tagchip">#'+t+'</span>').join(" ")+'</span></div><div class="card-foot"><button class="like-btn '+(state.likes[p.id]?"liked":"")+'" onclick="event.stopPropagation();like(\''+p.id+'\')">'+(state.likes[p.id]?"❤️":"🤍")+' '+L(p)+'</button><div style="display:flex;gap:8px;align-items:center"><span class="dls">⬇ '+D(p)+'</span><span class="zip-pill">ZIP</span></div></div></div></div>').join("");
+  $("#grid").innerHTML=list.map((p,i)=>'<div class="card" style="animation-delay:'+i*45+'ms" onclick="openPack(\''+p.id+'\')"><div class="thumb"><img src="'+p.cover_url+'" alt=""><span class="badge">ZIP</span></div><div class="card-body"><div class="card-title">'+esc(p.name)+'</div><div class="card-meta"><span>🎮 '+esc(p.ver)+'</span><span>'+(p.tags||[]).map(esc).map(t=>'<span class="tagchip">#'+t+'</span>').join(" ")+'</span></div><div class="card-foot"><button class="like-btn '+(liked[p.id]?"liked":"")+'" onclick="event.stopPropagation();like(\''+p.id+'\')">'+(liked[p.id]?"❤️":"🤍")+' '+(p.likes||0)+'</button><div style="display:flex;gap:8px;align-items:center"><span class="dls">⬇ '+(p.downloads||0)+'</span><span class="zip-pill">ZIP</span></div></div></div></div>').join("");
   $("#statPacks").textContent=PACKS.length;
-  $("#statLikes").textContent=PACKS.reduce((s,p)=>s+L(p),0);
-  $("#statDls").textContent=PACKS.reduce((s,p)=>s+D(p),0);
+  $("#statLikes").textContent=PACKS.reduce((s,p)=>s+(p.likes||0),0);
+  $("#statDls").textContent=PACKS.reduce((s,p)=>s+(p.downloads||0),0);
   const last=PACKS[0];
-  if(last&&last.coverImg)$("#heroPreview").innerHTML='<img src="'+last.coverImg+'" style="width:100%;height:100%;object-fit:cover" alt="">';
+  if(last)$("#heroPreview").innerHTML='<img src="'+last.cover_url+'" style="width:100%;height:100%;object-fit:cover">';
 }
 function openPack(id){
-  const p=PACKS.find(x=>x.id===id); if(!p)return;
-  $("#mHead").innerHTML='<img src="'+p.coverImg+'" alt="'+esc(p.name)+'"><div class="ov"></div><div class="m-title"><h3>'+esc(p.name)+'</h3><div class="card-meta"><span>🎮 '+esc(p.ver)+'</span><span>'+p.tags.map(esc).map(t=>'#'+t).join(" · ")+'</span></div></div>';
-  $("#mContent").innerHTML='<div class="m-desc">'+esc(p.desc)+'</div><div class="m-stats"><span>❤️ <b>'+L(p)+'</b></span><span>⬇ <b>'+D(p)+'</b></span><span>📦 <b>.zip</b></span></div>'+(p.shotImgs&&p.shotImgs.length?'<div class="gallery">'+p.shotImgs.map(s=>'<img src="'+s+'" onclick="window.open(\''+s+'\')">').join("")+'</div>':"")+'<div class="m-actions"><a class="btn" href="'+p.zipData+'" download="'+esc(p.name.replace(/[^a-z0-9]/gi,"_"))+'.zip" onclick="dl(\''+p.id+'\')">⬇ Скачать .zip</a><button class="btn ghost" onclick="like(\''+p.id+'\')">'+(state.likes[p.id]?"❤️ В избранном":"🤍 Лайк")+'</button></div>';
+  const p=PACKS.find(x=>x.id===id);if(!p)return;
+  $("#mHead").innerHTML='<img src="'+p.cover_url+'"><div class="ov"></div><div class="m-title"><h3>'+esc(p.name)+'</h3><div class="card-meta"><span>🎮 '+esc(p.ver)+'</span><span>'+(p.tags||[]).map(esc).map(t=>'#'+t).join(" · ")+'</span></div></div>';
+  $("#mContent").innerHTML='<div class="m-desc">'+esc(p.descr)+'</div><div class="m-stats"><span>❤️ <b>'+(p.likes||0)+'</b></span><span>⬇ <b>'+(p.downloads||0)+'</b></span><span>📦 <b>.zip</b></span></div>'+((p.shots_url||[]).length?'<div class="gallery">'+p.shots_url.map(s=>'<img src="'+s+'" onclick="window.open(\''+s+'\')">').join("")+'</div>':"")+'<div class="m-actions"><a class="btn" href="'+p.zip_url+'" download onclick="dl(\''+p.id+'\')">⬇ Скачать .zip</a><button class="btn ghost" onclick="like(\''+p.id+'\')">'+(liked[p.id]?"❤️ В избранном":"🤍 Лайк")+'</button></div>';
   $("#modalBg").classList.add("show");
 }
-function like(id){state.likes[id]=!state.likes[id];save();render();if($("#modalBg").classList.contains("show"))openPack(id)}
-function dl(id){state.dls[id]=(state.dls[id]||0)+1;save();render()}
+async function like(id){
+  const p=PACKS.find(x=>x.id===id);if(!p)return;
+  const nl=liked[id]?Math.max(0,(p.likes||0)-1):(p.likes||0)+1;
+  liked[id]=!liked[id];localStorage.setItem("ph_liked",JSON.stringify(liked));
+  p.likes=nl;render();if($("#modalBg").classList.contains("show"))openPack(id);
+  try{await fetch(SB_URL+"/rest/v1/packs?id=eq."+id,{method:"PATCH",headers:H,body:JSON.stringify({likes:nl})})}catch(e){}
+}
+async function dl(id){
+  const p=PACKS.find(x=>x.id===id);if(!p)return;
+  p.downloads=(p.downloads||0)+1;render();
+  try{await fetch(SB_URL+"/rest/v1/packs?id=eq."+id,{method:"PATCH",headers:H,body:JSON.stringify({downloads:p.downloads})})}catch(e){}
+}
 $("#closeModal").onclick=()=>$("#modalBg").classList.remove("show");
 $("#modalBg").onclick=e=>{if(e.target===$("#modalBg"))$("#modalBg").classList.remove("show")};
 document.addEventListener("keydown",e=>{if(e.key==="Escape")$("#modalBg").classList.remove("show")});
 $("#search").oninput=render;$("#fVer").onchange=render;$("#fTag").onchange=render;
-document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{
-  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
-  b.classList.add("active"); tab=b.dataset.tab; render();
-});
-$("#themeToggle").onclick=()=>{
-  const light=document.body.getAttribute("data-theme")==="light";
-  document.body.setAttribute("data-theme",light?"dark":"light");
-  localStorage.setItem("ph_theme",light?"dark":"light");
-  $("#themeToggle").textContent=light?"🌙":"☀️";
-};
-if(localStorage.getItem("ph_theme")==="light"){document.body.setAttribute("data-theme","light");$("#themeToggle").textContent="☀️"}
-else document.body.setAttribute("data-theme","dark");
-function toast(msg,err){
-  const t=document.createElement("div");t.className="toast"+(err?" err":"");t.textContent=msg;
-  document.body.appendChild(t);setTimeout(()=>t.remove(),2600);
-}
-function read(f){return new Promise(r=>{const fr=new FileReader();fr.onload=()=>r(fr.result);fr.readAsDataURL(f)})}
-function hook(drop,input){
-  const orig=drop.innerHTML;
-  drop.onclick=()=>input.click();
-  drop.ondragover=e=>{e.preventDefault();drop.classList.add("over")};
-  drop.ondragleave=()=>drop.classList.remove("over");
-  drop.ondrop=e=>{e.preventDefault();drop.classList.remove("over");input.files=e.dataTransfer.files;input.dispatchEvent(new Event("change"))};
-  input.onchange=()=>{
-    const files=[...input.files];
-    const ok=files.length&&(input.id!=="pZip"||files.every(f=>f.name.toLowerCase().endsWith(".zip")));
-    drop.classList.toggle("ok",ok);drop.classList.toggle("err",!ok);
-    drop.innerHTML=files.length?'<span class="ic">'+(ok?"✅":"⚠️")+'</span>'+files.map(f=>esc(f.name)).join(", "):orig;
-  };
-}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");tab=b.dataset.tab;render()});
+$("#themeToggle").onclick=()=>{const l=document.body.getAttribute("data-theme")==="light";document.body.setAttribute("data-theme",l?"dark":"light");localStorage.setItem("ph_theme",l?"dark":"light");$("#themeToggle").textContent=l?"🌙":"☀️"};
+if(localStorage.getItem("ph_theme")==="light"){document.body.setAttribute("data-theme","light");$("#themeToggle").textContent="☀️"}else document.body.setAttribute("data-theme","dark");
+function toast(msg,err){const t=document.createElement("div");t.className="toast"+(err?" err":"");t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2600)}
+function hook(drop,input){const orig=drop.innerHTML;drop.onclick=()=>input.click();drop.ondragover=e=>{e.preventDefault();drop.classList.add("over")};drop.ondragleave=()=>drop.classList.remove("over");drop.ondrop=e=>{e.preventDefault();drop.classList.remove("over");input.files=e.dataTransfer.files;input.dispatchEvent(new Event("change"))};input.onchange=()=>{const files=[...input.files];const ok=files.length&&(input.id!=="pZip"||files.every(f=>f.name.toLowerCase().endsWith(".zip")));drop.classList.toggle("ok",ok);drop.classList.toggle("err",!ok);drop.innerHTML=files.length?'<span class="ic">'+(ok?"✅":"⚠️")+'</span>'+files.map(f=>esc(f.name)).join(", "):orig}}
 hook($("#dropImg"),$("#pImg"));hook($("#dropShots"),$("#pShots"));hook($("#dropZip"),$("#pZip"));
+
+async function upload(file,path){
+  const r=await fetch(SB_URL+"/storage/v1/object/packs/"+path,{method:"POST",headers:{...H,"Content-Type":file.type||"application/octet-stream","x-upsert":"true"},body:file});
+  if(!r.ok){throw new Error("Upload failed: "+r.status+" "+await r.text())}
+  return sbUrl(path);
+}
 $("#packForm").onsubmit=async e=>{
   e.preventDefault();
-  const zip=$("#pZip").files[0];
-  if(!zip||!zip.name.toLowerCase().endsWith(".zip")){toast("Файл должен быть .zip!",true);return}
-  const img=$("#pImg").files[0];
-  if(!img){toast("Добавь превью-картинку!",true);return}
-  const coverImg=await read(img);
-  const shotImgs=[]; for(const f of $("#pShots").files)shotImgs.push(await read(f));
-  const zipData=await read(zip);
-  const p={
-    id:"p"+Date.now(), name:$("#pName").value.trim(), ver:$("#pVer").value.trim(),
-    tags:[$("#pTag1").value.trim(),$("#pTag2").value?$("#pTag2").value.trim():""].filter(Boolean),
-    desc:$("#pDesc").value.trim(), coverImg:coverImg, shotImgs:shotImgs, zipData:zipData,
-    _bl:0,_bd:0, isNew:true, added:Date.now()
-  };
-  PACKS.unshift(p); save(); render(); openPack(p.id); toast("Пак добавлен!");
+  const btn=$("#submitBtn");btn.disabled=true;btn.textContent="Загрузка...";
+  try{
+    const zip=$("#pZip").files[0],img=$("#pImg").files[0];
+    if(!zip||!zip.name.toLowerCase().endsWith(".zip")){toast("Файл должен быть .zip!",true);return}
+    if(!img){toast("Добавь превью-картинку!",true);return}
+    const id="p"+Date.now();
+    const cover_url=await upload(img,id+"/cover."+img.name.split(".").pop());
+    const shots_url=[];
+    for(let i=0;i<$("#pShots").files.length;i++)shots_url.push(await upload($("#pShots").files[i],id+"/shot"+i+"."+$("#pShots").files[i].name.split(".").pop()));
+    const zip_url=await upload(zip,id+"/pack.zip");
+    const p={id,name:$("#pName").value.trim(),ver:$("#pVer").value.trim(),tags:[$("#pTag1").value.trim(),$("#pTag2").value?.trim()].filter(Boolean),descr:$("#pDesc").value.trim(),cover_url,shots_url,zip_url,likes:0,downloads:0};
+    const r=await fetch(SB_URL+"/rest/v1/packs",{method:"POST",headers:H,body:JSON.stringify(p)});
+    if(!r.ok)throw new Error(await r.text());
+    PACKS.unshift(p);render();openPack(id);toast("Пак добавлен! Теперь его видят все 🎉");
+  }catch(err){toast("Ошибка загрузки: "+err.message,true)}
+  finally{btn.disabled=false;btn.textContent="Добавить пак"}
 };
-render();
+loadPacks();
 </script>
 </body>
 </html>
