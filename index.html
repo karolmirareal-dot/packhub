@@ -214,7 +214,7 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim2);font-si
 <section id="add"><div class="wrap">
   <div class="sec-head"><h2>ВЫЛОЖИТЬ ПАК</h2><div class="sec-line"></div></div>
   <p class="h-sub">Фото, описание и .zip загрузятся на сервер — пак увидят все.</p>
-  <form class="form" id="packForm">
+  <form class="form" id="packForm" novalidate>
     <div class="f-grid">
       <div><label>Название <b>*</b></label><input type="text" id="pName" required placeholder="NeonCraft PvP"></div>
       <div><label>Версия Minecraft <b>*</b></label><input type="text" id="pVer" required placeholder="1.21"></div>
@@ -313,7 +313,9 @@ async function upload(file,path){
   if(!r.ok){throw new Error("Upload failed: "+r.status+" "+await r.text())}
   return sbUrl(path);
 }
-$("#packForm").onsubmit=async e=>{
+const formEl=document.getElementById("packForm");
+if(!formEl){console.error("packForm not found!")}else{
+formEl.addEventListener("submit",async e=>{
   e.preventDefault();
   const btn=$("#submitBtn");btn.disabled=true;btn.textContent="Загрузка...";
   try{
@@ -329,9 +331,9 @@ $("#packForm").onsubmit=async e=>{
     const r=await fetch(SB_URL+"/rest/v1/packs",{method:"POST",headers:H,body:JSON.stringify(p)});
     if(!r.ok)throw new Error(await r.text());
     PACKS.unshift(p);render();openPack(id);toast("Пак добавлен! Теперь его видят все 🎉");
-  }catch(err){toast("Ошибка загрузки: "+err.message,true)}
+  }catch(err){console.error("FULL ERROR:",err);alert("Ошибка загрузки:\n"+err.message+"\n\nСтек: "+(err.stack||"нет"))}
   finally{btn.disabled=false;btn.textContent="Добавить пак"}
-};
+});}
 loadPacks();});
 </script>
 </body>
