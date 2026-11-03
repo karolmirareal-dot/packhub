@@ -305,7 +305,19 @@ document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelect
 $("#themeToggle").onclick=()=>{const l=document.body.getAttribute("data-theme")==="light";document.body.setAttribute("data-theme",l?"dark":"light");localStorage.setItem("ph_theme",l?"dark":"light");$("#themeToggle").textContent=l?"🌙":"☀️"};
 if(localStorage.getItem("ph_theme")==="light"){document.body.setAttribute("data-theme","light");$("#themeToggle").textContent="☀️"}else document.body.setAttribute("data-theme","dark");
 function toast(msg,err){const t=document.createElement("div");t.className="toast"+(err?" err":"");t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2600)}
-function hook(drop,input){const orig=drop.innerHTML;drop.onclick=()=>input.click();drop.ondragover=e=>{e.preventDefault();drop.classList.add("over")};drop.ondragleave=()=>drop.classList.remove("over");drop.ondrop=e=>{e.preventDefault();drop.classList.remove("over");input.files=e.dataTransfer.files;input.dispatchEvent(new Event("change"))};input.onchange=()=>{const files=[...input.files];const ok=files.length&&(input.id!=="pZip"||files.every(f=>f.name.toLowerCase().endsWith(".zip")));drop.classList.toggle("ok",ok);drop.classList.toggle("err",!ok);drop.innerHTML=files.length?'<span class="ic">'+(ok?"✅":"⚠️")+'</span>'+files.map(f=>esc(f.name)).join(", "):orig}; if(files.length)drop.appendChild(input)}
+function hook(drop,input){
+  const origText=drop.textContent;
+  drop.onclick=e=>{e.preventDefault();input.click()};
+  drop.ondragover=e=>{e.preventDefault();drop.classList.add("over")};
+  drop.ondragleave=()=>drop.classList.remove("over");
+  drop.ondrop=e=>{e.preventDefault();e.stopPropagation();drop.classList.remove("over");input.files=e.dataTransfer.files;input.dispatchEvent(new Event("change"))};
+  input.onchange=()=>{
+    const files=[...input.files];
+    const ok=files.length&&(input.id!=="pZip"||files.every(f=>f.name.toLowerCase().endsWith(".zip")));
+    drop.classList.toggle("ok",ok);drop.classList.toggle("err",!ok);
+    drop.textContent=files.length?(ok?"✅ ":"⚠️ ")+files.map(f=>f.name).join(", "):origText;
+  };
+}
 hook($("#dropImg"),$("#pImg"));hook($("#dropShots"),$("#pShots"));hook($("#dropZip"),$("#pZip"));
 
 async function upload(file,path){
